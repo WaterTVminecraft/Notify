@@ -1,0 +1,84 @@
+const axios = require('axios');
+console.log('Load')
+const themeFullMoon = {
+    name:"Full Moon Near",
+    color:'000000',
+    url:''
+}
+const themeMirage = {
+    name:"Mirage Near",
+    color:'000000',
+    url:''
+}
+const themehaki = {
+    name:"Haki Near",
+    color:'000000',
+    url:'https://discord.com/api/webhooks/1194274207157194834/F49ZccUObT-09AqDdRIQwGOiF_1WFT0UY-Te-r4yWq5nWLRRcE_9mxsz3lEbaGEicnPa'
+}
+const themeSword = {
+    name:"Sword Near",
+    color:'000000',
+    url:''
+}
+
+token = '';
+const { Client, Intents } = require('discord.js-selfbot-v13');
+const DiscordBot = new Client();
+DiscordBot.on('ready', async () => {
+console.log('Ready 1')
+});
+DiscordBot.on('messageCreate',async (message) => {
+    const channelId = message.channelId;
+    const channelIdMappings = {
+        1183388023275126784: themeFullMoon,
+        1085571159849979944: themeFullMoon,
+        1157866606345592874: themeFullMoon,
+        1162589241914699858: themeFullMoon,
+        1085601598555832400: themeFullMoon,
+        1183388021316386816: themeMirage,
+        1085601317717811200: themeMirage,
+        1157341560149647540: themeMirage,
+        1085629109893349498: themeMirage,
+        1068870160309555310: themeMirage,
+        1194274113141866609: themehaki,
+        1127514568982265897: themehaki,
+        1183388270193815693: themehaki,
+        1081785701017845820: themehaki,
+        113365958898666701: themehaki,
+        1144623714663682138: themeSword,
+        118376457512499614: themeSword,
+        1160185085778214924: themeSword,
+        1190466118305976340: themeMirage,
+        1188092922504151110: themeFullMoon,
+        1190539924525547522: themehaki,
+        1200364939680948305: themeSword,
+        1183760660371341342: themeMirage,
+        1183760702972887050: themeFullMoon,
+        1183760753510060093: themeSword,
+        1183761092900560966: themehaki,
+    };
+    if (channelIdMappings[channelId]) {
+        const data = message.embeds[0].fields
+        _S(channelIdMappings[channelId], data);
+    }
+})
+async function _S(theme,fieldsss) {
+    const data = {
+        content: null,
+        embeds: [
+          {
+            title: theme.name,
+            description: '[Click To Join Discord](https://discord.gg/wx87NG9HWd)',
+            color: theme.color,
+            fields: fieldsss,
+            author: {name: 'VN1 Hub',},
+            footer: {text: `VN1 Hub | https://discord.gg/wx87NG9HWd`,},
+        },],
+        attachments: [],
+    };
+    try {
+      const response = await axios.post(theme.url, data);
+
+      if (response.status === 204) {} else {}} catch (error) {}
+  }
+  DiscordBot.login(token);
